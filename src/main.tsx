@@ -242,6 +242,21 @@ const projects: Project[] = [
 
 const projectIcons = [Database, Factory, Radar, Gauge, BrainCircuit, Layers3, Search];
 
+const showcaseItems = [
+  {
+    title: "首页",
+    subtitle: "综合能力总览",
+    src: asset("technical_overview_hero.png"),
+    accent: "#7dd3fc",
+  },
+  ...projects.map((project) => ({
+    title: project.title,
+    subtitle: project.subtitle,
+    src: project.visual,
+    accent: project.accent,
+  })),
+];
+
 const resultStories: Record<string, ResultSection[]> = {
   "01_spider2table": [
     {
@@ -579,10 +594,12 @@ function ParticleField() {
 
 function App() {
   const [light, setLight] = useState({ x: 50, y: 35 });
-  const [page, setPage] = useState<"home" | "project" | "contact">("home");
+  const [page, setPage] = useState<"intro" | "home" | "project" | "contact">("intro");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [showcaseIndex, setShowcaseIndex] = useState(0);
   const [modal, setModal] = useState<EvidenceItem | null>(null);
   const selectedProject = projects[selectedIndex];
+  const currentShowcase = showcaseItems[showcaseIndex];
   const storySections = useMemo<ResultSection[]>(() => {
     return resultStories[selectedProject.id] ?? [
       {
@@ -638,7 +655,13 @@ function App() {
     <div
       className="app"
       onPointerMove={onPointerMove}
-      style={{ "--spot-x": `${light.x}%`, "--spot-y": `${light.y}%`, "--active": selectedProject.accent } as React.CSSProperties}
+      style={{
+        "--spot-x": `${light.x}%`,
+        "--spot-y": `${light.y}%`,
+        "--eye-x": `${((light.x - 50) / 50) * 18}px`,
+        "--eye-y": `${((light.y - 50) / 50) * 14}px`,
+        "--active": page === "home" ? currentShowcase.accent : selectedProject.accent,
+      } as React.CSSProperties}
     >
       <ParticleField />
       <div className="circuit-layer" aria-hidden="true" />
@@ -648,17 +671,54 @@ function App() {
           <span>赵艺博</span>
         </button>
         <nav>
-          <button className={page === "home" ? "active" : ""} onClick={() => setPage("home")} type="button">主页</button>
+          <button className={page === "intro" ? "active" : ""} onClick={() => setPage("intro")} type="button">起始</button>
+          <button className={page === "home" ? "active" : ""} onClick={() => setPage("home")} type="button">首页</button>
           <button className={page === "project" ? "active" : ""} onClick={() => setPage("project")} type="button">项目</button>
           <button className={page === "contact" ? "active" : ""} onClick={() => setPage("contact")} type="button">联系</button>
         </nav>
       </header>
 
       <main>
-        {page === "home" ? (
+        {page === "intro" ? (
+          <section className="intro-page page-shell">
+            <div className="intro-orbit" aria-hidden="true">
+              <div className="sentinel">
+                <div className="sentinel-head">
+                  <div className="sentinel-eye">
+                    <span />
+                  </div>
+                  <i />
+                </div>
+                <div className="sentinel-body">
+                  <b />
+                  <b />
+                  <b />
+                </div>
+              </div>
+            </div>
+
+            <div className="intro-copy">
+              <p className="intro-mark">YIBO ZHAO</p>
+              <h1>
+                <span>个人主页</span>
+                <span>项目索引</span>
+              </h1>
+              <p>前后端开发、数据分析、雷达、机器学习与深度学习、Agent 开发。</p>
+              <div className="intro-actions">
+                <button className="primary-action" onClick={() => setPage("home")} type="button">
+                  进入首页 <ArrowUpRight size={18} />
+                </button>
+                <button className="secondary-action" onClick={() => setPage("project")} type="button">
+                  查看项目 <CircuitBoard size={18} />
+                </button>
+              </div>
+            </div>
+          </section>
+        ) : page === "home" ? (
           <section className="home-page page-shell">
             <div className="home-copy">
-              <h1>赵艺博</h1>
+              <p className="home-kicker">PERSONAL HOMEPAGE</p>
+              <h1 className="art-title" data-text="赵艺博">赵艺博</h1>
               <p className="home-role">前后端开发 / 数据分析 / 雷达 / 机器学习与深度学习 / Agent 开发</p>
               <div className="resume-snapshot" aria-label="简历摘要">
                 <div><strong>西安交通大学</strong><span>智能制造工程本科</span></div>
@@ -676,20 +736,24 @@ function App() {
               </div>
             </div>
 
-            <section className="home-showcase" aria-label="项目总览">
-              <img src={asset("technical_overview_hero.png")} alt="技术总览大图" />
+            <section className="home-showcase" aria-label="首页与项目预览">
+              <div className="showcase-label">
+                <span>{String(showcaseIndex).padStart(2, "0")}</span>
+                <strong>{currentShowcase.title}</strong>
+                <small>{currentShowcase.subtitle}</small>
+              </div>
+              <img src={currentShowcase.src} alt={`${currentShowcase.title} 预览图`} />
               <div className="showcase-strip">
-                {projects.map((project, index) => (
+                {showcaseItems.map((item, index) => (
                   <button
-                    key={project.id}
-                    className={index === selectedIndex ? "active" : ""}
-                    onClick={() => {
-                      setSelectedIndex(index);
-                      setPage("project");
-                    }}
+                    key={item.title}
+                    className={index === showcaseIndex ? "active" : ""}
+                    onMouseEnter={() => setShowcaseIndex(index)}
+                    onFocus={() => setShowcaseIndex(index)}
+                    onClick={() => setShowcaseIndex(index)}
                     type="button"
                   >
-                    {String(index + 1).padStart(2, "0")}
+                    {index === 0 ? "首页" : String(index).padStart(2, "0")}
                   </button>
                 ))}
               </div>

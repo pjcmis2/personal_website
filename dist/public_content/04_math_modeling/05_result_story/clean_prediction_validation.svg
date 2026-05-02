@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#081322"/>
+  <style>text{font-family:"Microsoft YaHei","Segoe UI",Arial,sans-serif;fill:#eef4ff}.title{font-size:42px;font-weight:800}.sub{font-size:22px;fill:#a8bad6}.metric{font-size:46px;font-weight:900}.label{font-size:22px;font-weight:700}.small{font-size:18px;fill:#b9c7dc}.card{fill:rgba(255,255,255,.065);stroke:rgba(255,255,255,.18)}</style>
+  <text x="64" y="78" class="title">得分走势预测验证</text>
+  <text x="64" y="118" class="sub">DTMM 在整场比例和 20-point 时间窗上同时验证预测效果</text>
+  <rect x="74" y="160" width="315" height="190" rx="24" class="card"/><text x="112" y="230" class="metric">80%</text><text x="112" y="276" class="label">match 1701 预测命中率</text><text x="112" y="316" class="small">第三组实验：Wimbledon-1701</text>
+  <rect x="442" y="160" width="315" height="190" rx="24" class="card"/><text x="480" y="230" class="metric">0.9192</text><text x="480" y="276" class="label">20-point 窗口相关系数</text><text x="480" y="316" class="small">真实 wins 与预测 wins 对齐</text>
+  <rect x="810" y="160" width="315" height="190" rx="24" class="card"/><text x="848" y="230" class="metric">95.898%</text><text x="848" y="276" class="label">cosine similarity</text><text x="848" y="316" class="small">逐点胜负向量相似度</text>
+  <g transform="translate(120 440)">
+    <line x1="0" y1="170" x2="900" y2="170" stroke="#45617f"/>
+    <line x1="0" y1="0" x2="0" y2="170" stroke="#45617f"/>
+    <polyline points="0,150 80,130 160,138 240,96 320,90 400,78 480,62 560,76 640,42 720,50 800,36 900,48" fill="none" stroke="#ffd166" stroke-width="6"/>
+    <polyline points="0,158 80,136 160,132 240,104 320,82 400,86 480,58 560,74 640,48 720,44 800,42 900,52" fill="none" stroke="#7dd3fc" stroke-width="5" stroke-dasharray="12 10"/>
+    <text x="930" y="42" class="small">actual</text><text x="930" y="72" class="small">predict</text>
+  </g>
+</svg>

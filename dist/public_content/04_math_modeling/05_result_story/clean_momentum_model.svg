@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061324"/>
+      <stop offset="1" stop-color="#13213c"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd166"/>
+      <stop offset="1" stop-color="#58d68d"/>
+    </linearGradient>
+    <style>
+      text{font-family:"Microsoft YaHei","Segoe UI",Arial,sans-serif;fill:#eef4ff}
+      .muted{fill:#9fb1cc}.title{font-size:42px;font-weight:800}.sub{font-size:22px}
+      .label{font-size:22px;font-weight:700}.small{font-size:18px}.num{font-size:20px;font-weight:800}
+      .card{fill:rgba(255,255,255,.06);stroke:rgba(255,255,255,.18);stroke-width:1.2}
+    </style>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <text x="64" y="78" class="title">Momentum 指标构造</text>
+  <text x="64" y="118" class="sub muted">用 6 个比赛过程变量量化球员场上势能，并通过熵权法确定权重</text>
+  <rect x="64" y="154" width="1072" height="118" rx="22" class="card"/>
+  <text x="116" y="228" style="font-size:34px;font-weight:800">M = a1x1 + a2x2 + a3x3 + a4x4 + a5x5 + a6x6</text>
+  <text x="740" y="226" class="small muted">x: normalized match factors, a: entropy weights</text>
+  <g transform="translate(76 330)">
+    <text x="0" y="-30" class="label">Player 1 weights</text>
+    <rect x="0" y="0" width="1010" height="48" rx="14" fill="rgba(255,255,255,.05)"/>
+    <rect x="0" y="0" width="151" height="48" rx="14" fill="url(#bar)"/><text x="18" y="31" class="num">0.151 points_adv</text>
+    <rect x="169" y="0" width="163" height="48" rx="14" fill="url(#bar)"/><text x="187" y="31" class="num">0.164 break</text>
+    <rect x="350" y="0" width="161" height="48" rx="14" fill="url(#bar)"/><text x="368" y="31" class="num">0.161 errors</text>
+    <rect x="529" y="0" width="177" height="48" rx="14" fill="url(#bar)"/><text x="547" y="31" class="num">0.178 winner</text>
+    <rect x="724" y="0" width="168" height="48" rx="14" fill="url(#bar)"/><text x="742" y="31" class="num">0.168 net</text>
+    <rect x="910" y="0" width="178" height="48" rx="14" fill="url(#bar)"/><text x="928" y="31" class="num">0.178 serve</text>
+  </g>
+  <g transform="translate(76 470)">
+    <text x="0" y="-30" class="label">Player 2 weights</text>
+    <rect x="0" y="0" width="1010" height="48" rx="14" fill="rgba(255,255,255,.05)"/>
+    <rect x="0" y="0" width="152" height="48" rx="14" fill="#7dd3fc"/><text x="18" y="31" class="num">0.152 points_adv</text>
+    <rect x="170" y="0" width="166" height="48" rx="14" fill="#7dd3fc"/><text x="188" y="31" class="num">0.166 break</text>
+    <rect x="354" y="0" width="163" height="48" rx="14" fill="#7dd3fc"/><text x="372" y="31" class="num">0.163 errors</text>
+    <rect x="535" y="0" width="172" height="48" rx="14" fill="#7dd3fc"/><text x="553" y="31" class="num">0.172 winner</text>
+    <rect x="725" y="0" width="173" height="48" rx="14" fill="#7dd3fc"/><text x="743" y="31" class="num">0.173 net</text>
+    <rect x="916" y="0" width="172" height="48" rx="14" fill="#7dd3fc"/><text x="934" y="31" class="num">0.172 serve</text>
+  </g>
+  <text x="76" y="634" class="sub">含义：momentum 将比分优势、破发、非受迫失误、制胜分、网前得分和发球优势合成为可建模变量。</text>
+</svg>

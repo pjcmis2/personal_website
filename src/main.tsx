@@ -615,6 +615,25 @@ function App() {
     setLight({ x: (event.clientX / window.innerWidth) * 100, y: (event.clientY / window.innerHeight) * 100 });
   };
 
+  const onTiltMove = (event: React.PointerEvent<HTMLElement>) => {
+    const target = event.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width - 0.5;
+    const py = (event.clientY - rect.top) / rect.height - 0.5;
+    target.style.setProperty("--tilt-ry", `${px * 14}deg`);
+    target.style.setProperty("--tilt-rx", `${-py * 12}deg`);
+    target.style.setProperty("--tilt-glow-x", `${(px + 0.5) * 100}%`);
+    target.style.setProperty("--tilt-glow-y", `${(py + 0.5) * 100}%`);
+  };
+
+  const onTiltLeave = (event: React.PointerEvent<HTMLElement>) => {
+    const target = event.currentTarget;
+    target.style.setProperty("--tilt-ry", "0deg");
+    target.style.setProperty("--tilt-rx", "0deg");
+    target.style.setProperty("--tilt-glow-x", "50%");
+    target.style.setProperty("--tilt-glow-y", "50%");
+  };
+
   return (
     <div
       className="app"
@@ -707,17 +726,17 @@ function App() {
                 <p>如果你希望进一步了解项目细节、实习经历或技术方向，可以通过以下方式联系。</p>
               </div>
               <div className="contact-grid">
-                <a href="tel:18710360951">
+                <a href="tel:18710360951" className="tilt-surface" onPointerMove={onTiltMove} onPointerLeave={onTiltLeave}>
                   <Phone size={22} />
                   <span>电话</span>
                   <strong>18710360951</strong>
                 </a>
-                <a href="mailto:zhaoyibo927@stu.xjtu.edu.cn">
+                <a href="mailto:zhaoyibo927@stu.xjtu.edu.cn" className="tilt-surface" onPointerMove={onTiltMove} onPointerLeave={onTiltLeave}>
                   <Mail size={22} />
                   <span>邮箱</span>
                   <strong>zhaoyibo927@stu.xjtu.edu.cn</strong>
                 </a>
-                <div>
+                <div className="tilt-surface" onPointerMove={onTiltMove} onPointerLeave={onTiltLeave}>
                   <MapPin size={22} />
                   <span>学校</span>
                   <strong>西安交通大学 · 智能制造工程</strong>
@@ -837,7 +856,7 @@ function App() {
 
       {modal && (
         <div className="modal-backdrop" onClick={() => setModal(null)} role="presentation">
-          <div className="media-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true">
+          <div className="media-modal tilt-surface" onPointerMove={onTiltMove} onPointerLeave={onTiltLeave} onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true">
             <button className="modal-close" onClick={() => setModal(null)} type="button" aria-label="关闭">
               <X size={20} />
             </button>

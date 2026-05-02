@@ -292,15 +292,29 @@ main {
 .contact-panel {
   width: min(1040px, 100%);
   display: grid;
-  gap: 34px;
-  padding: clamp(28px, 5vw, 64px);
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  gap: clamp(28px, 3.2vw, 44px);
+  padding: clamp(34px, 5vw, 70px);
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   background:
-    radial-gradient(circle at 12% 16%, rgba(125, 211, 252, 0.18), transparent 34%),
-    radial-gradient(circle at 88% 20%, rgba(255, 209, 102, 0.14), transparent 32%),
-    rgba(255, 255, 255, 0.06);
-  box-shadow: 0 28px 110px rgba(0, 0, 0, 0.34);
+    radial-gradient(circle at 8% 14%, rgba(95, 217, 255, 0.23), transparent 38%),
+    radial-gradient(circle at 86% 16%, rgba(78, 120, 255, 0.22), transparent 34%),
+    linear-gradient(140deg, rgba(11, 20, 38, 0.8), rgba(9, 14, 28, 0.72));
+  box-shadow: 0 34px 130px rgba(0, 0, 0, 0.44);
+  backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.12), transparent 32%),
+    radial-gradient(circle at 20% 108%, rgba(95, 217, 255, 0.2), transparent 38%);
+  opacity: 0.65;
 }
 
 .contact-panel h1 {
@@ -321,27 +335,26 @@ main {
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: clamp(16px, 2vw, 24px);
 }
 
 .contact-grid a,
 .contact-grid div {
-  min-height: 150px;
+  min-height: 170px;
   display: grid;
   align-content: center;
-  gap: 12px;
-  padding: 22px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  background: rgba(5, 9, 20, 0.52);
+  gap: 14px;
+  padding: clamp(24px, 2.2vw, 32px);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(145deg, rgba(8, 15, 31, 0.82), rgba(9, 17, 34, 0.6));
   color: inherit;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: border-color 180ms ease, background 180ms ease;
 }
 
 .contact-grid a:hover {
-  transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--active, #4f8cff) 70%, white);
-  background: rgba(255, 255, 255, 0.085);
+  background: linear-gradient(145deg, rgba(12, 24, 48, 0.88), rgba(10, 20, 39, 0.66));
 }
 
 .contact-grid svg {
@@ -356,8 +369,37 @@ main {
 
 .contact-grid strong {
   color: #ffffff;
-  font-size: clamp(17px, 1.6vw, 22px);
+  font-size: clamp(18px, 1.7vw, 24px);
   line-height: 1.35;
+}
+
+.tilt-surface {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(980px) rotateX(var(--tilt-rx, 0deg)) rotateY(var(--tilt-ry, 0deg));
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  will-change: transform;
+}
+
+.tilt-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--tilt-glow-x, 50%) var(--tilt-glow-y, 50%), rgba(95, 217, 255, 0.25), transparent 52%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.tilt-surface:hover {
+  box-shadow:
+    0 16px 42px rgba(10, 22, 52, 0.58),
+    0 0 0 1px rgba(95, 217, 255, 0.24) inset;
+}
+
+.tilt-surface:hover::before {
+  opacity: 1;
 }
 
 .showcase-strip {
@@ -805,52 +847,67 @@ main {
   z-index: 40;
   display: grid;
   place-items: center;
-  padding: 26px;
-  background: rgba(3, 6, 14, 0.84);
-  backdrop-filter: blur(18px);
+  padding: clamp(16px, 2.4vw, 28px);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(95, 217, 255, 0.15), transparent 32%),
+    radial-gradient(circle at 82% 76%, rgba(80, 118, 255, 0.15), transparent 34%),
+    rgba(2, 6, 16, 0.82);
+  backdrop-filter: blur(20px);
 }
 
 .media-modal {
   position: relative;
-  width: min(1180px, 94vw);
-  max-height: 88vh;
+  width: min(1260px, 95vw);
+  max-height: 92vh;
   display: grid;
-  gap: 14px;
-  padding: 16px;
-  border-radius: 24px;
-  background: #080d1a;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 30px 120px rgba(0, 0, 0, 0.52);
+  gap: 16px;
+  padding: clamp(18px, 2vw, 28px);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(95, 217, 255, 0.2), transparent 38%),
+    linear-gradient(150deg, rgba(6, 13, 28, 0.95), rgba(7, 16, 35, 0.86));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 38px 140px rgba(0, 0, 0, 0.56);
+  overflow: hidden;
 }
 
 .media-modal img,
 .media-modal video {
   width: 100%;
-  max-height: 74vh;
+  max-height: 76vh;
   object-fit: contain;
-  border-radius: 16px;
-  background: #0f172a;
+  border-radius: 18px;
+  background: rgba(10, 19, 41, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .media-modal p {
-  margin: 0 6px 4px;
+  margin: 2px 8px 6px;
   color: #d9e6f8;
-  font-size: 14px;
-  font-weight: 720;
+  font-size: 15px;
+  font-weight: 740;
+  letter-spacing: 0.01em;
 }
 
 .modal-close {
   position: absolute;
-  top: -14px;
-  right: -14px;
+  top: 12px;
+  right: 12px;
   display: grid;
   place-items: center;
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.92);
   color: #06101f;
   cursor: pointer;
+  border: 1px solid rgba(5, 14, 34, 0.2);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.06);
+  background: #ffffff;
 }
 
 @keyframes circuitDrift {
